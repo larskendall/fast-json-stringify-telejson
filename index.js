@@ -303,9 +303,9 @@ function $asBooleanNullable (bool) {
 function $asDatetime (date, skipQuotes) {
   const quotes = skipQuotes === true ? '' : '"'
   if (date instanceof Date) {
-    return quotes + date.toISOString() + quotes
+    return quotes + '_date_' + date.toISOString() + quotes
   } else if (date && typeof date.toISOString === 'function') {
-    return quotes + date.toISOString() + quotes
+    return quotes + '_date_' + date.toISOString() + quotes
   } else {
     return $asString(date, skipQuotes)
   }
@@ -314,9 +314,9 @@ function $asDatetime (date, skipQuotes) {
 function $asDate (date, skipQuotes) {
   const quotes = skipQuotes === true ? '' : '"'
   if (date instanceof Date) {
-    return quotes + new Date(date.getTime() - (date.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10) + quotes
+    return quotes + '_date_' + new Date(date.getTime() - (date.getTimezoneOffset() * 60000 )).toISOString().slice(0, 10) + quotes
   } else if (date && typeof date.format === 'function') {
-    return quotes + date.format('YYYY-MM-DD') + quotes
+    return quotes + '_date_' + date.format('YYYY-MM-DD') + quotes
   } else {
     return $asString(date, skipQuotes)
   }
@@ -339,7 +339,7 @@ function $asTime (date, skipQuotes) {
 function $asString (str, skipQuotes) {
   const quotes = skipQuotes === true ? '' : '"'
   if (str instanceof Date) {
-    return quotes + str.toISOString() + quotes
+    return quotes + '_date_' + str.toISOString() + quotes
   } else if (str === null) {
     return quotes + quotes
   } else if (str instanceof RegExp) {
